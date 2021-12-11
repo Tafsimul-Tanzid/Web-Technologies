@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in </title>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"
+    integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+    <form> 
+        <label for="username">Username</label>
+        <input onkeyup="UsernameCheck();" type="text" value="" name="username" id="username"><span id="unErr" style="color: red;"></span>
+        <br><br>
+        <label for="password">Password</label>
+        <input onkeyup="UserpassCheck();" type="text" value="" name="password" id="pass"><span id="upErr" style="color: red;"></span>
+        <br><br>
+
+        <input onclick="Login();" type="submit" value="login" name="Log in" id="btn">
+    </form>
+    
+
+    <script>
+        function UsernameCheck()
+        {
+            let name=document.getElementById("username").value;
+            let unErr=document.getElementById("unErr");
+            if(name.length<3)
+            {
+                unErr.innerHTML="At least 3 Char Needed";
+                return 0;
+            }
+            else{
+                unErr.innerHTML="";
+                return 1;
+            }
+        }
+        function UserpassCheck()
+        {
+            let pass=document.getElementById("pass").value;
+            let upErr=document.getElementById("upErr");
+            if(pass.length<8)
+            {
+                upErr.innerHTML="At least 8 Char Needed";
+                return 0;
+            }
+            else{
+                upErr.innerHTML="";
+                return 1;
+            }
+        }
+        function Login(){
+            if(UsernameCheck()+UserpassCheck()==2){
+                alert("Login Successful");
+            }
+            else{
+                alert("Please Check Username and Password");
+            }
+
+            $.ajax({
+            accepts: {
+                mycustomtype: 'application/x-some-custom-type'
+            },
+            
+            // Instructions for how to deserialize a `mycustomtype`
+            converters: {
+                'text mycustomtype': function(result) {
+                // Do Stuff
+                return newresult;
+                }
+            },
+            
+            // Expect a `mycustomtype` back from server
+            dataType: 'mycustomtype'
+            });
+        }
+    </script>
+</body>
+</html>
